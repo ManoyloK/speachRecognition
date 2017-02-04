@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="389.0" prefWidth="559.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.org.manoilok.speachrecognition.app.Controller">
+  <children>
+    <TabPane prefHeight="363.0" prefWidth="559.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
+      <tabs>
+        <Tab text="Исходный сигнал">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="332.0" prefWidth="531.0">
+              <children>
+                <LineChart fx:id="currSignalChart" blendMode="SRC_OVER" cache="true" cacheHint="SPEED" depthTest="ENABLE" prefHeight="318.0" prefWidth="559.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <xAxis>
+                    <NumberAxis id="xAxis" fx:id="xAxisCurrSignal" side="BOTTOM" style="-fx-stroke-width: 20px" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis id="yAxis" fx:id="yAxisCurrSignal" side="LEFT" style="-fx-stroke-width: 20px" />
+                  </yAxis>
+                </LineChart>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Сигнал без латентных периодов">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="332.0" prefWidth="531.0">
+              <children>
+                <LineChart fx:id="withOutLPChart" prefHeight="332.0" prefWidth="551.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
+                  <xAxis>
+                    <NumberAxis fx:id="xAxisWithOutLP" side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis fx:id="yAxisWithOutLP" side="LEFT" />
+                  </yAxis>
+                </LineChart>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Нормализованый сигнал">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <LineChart fx:id="normalizeChart" prefHeight="290.0" prefWidth="559.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <xAxis>
+                    <NumberAxis fx:id="xAxisNorm" side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis fx:id="yAxisNorm" side="LEFT" />
+                  </yAxis>
+                </LineChart>
+                <Button layoutX="392.0" layoutY="298.0" mnemonicParsing="false" onAction="#applySegmentationButton" text="Сегментировать" />
+                <TextField fx:id="thresholdField" layoutX="180.0" layoutY="297.0" prefWidth="200.0" />
+                <Label layoutX="101.0" layoutY="300.0" text="Граница" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Спектр сигнала">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <LineChart fx:id="spectrChart" prefHeight="301.0" prefWidth="559.0" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <xAxis>
+                    <NumberAxis id="xAxisNorm" fx:id="xAxisSpectr" side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis id="yAxisNorm" fx:id="yAxisSpectr" side="LEFT" />
+                  </yAxis>
+                </LineChart>
+                <ScrollBar fx:id="scrollBar" blockIncrement="1.0" max="50.0" onMouseClicked="#moveScrollBar" prefHeight="24.0" prefWidth="545.0" visibleAmount="1.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Полосы">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <LineChart fx:id="bandChart" prefHeight="271.0" prefWidth="559.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <xAxis>
+                    <NumberAxis id="xAxisNorm" fx:id="xAxisBannd" side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis id="yAxisNorm" fx:id="yAxisBannd" side="LEFT" />
+                  </yAxis>
+                </LineChart>
+                <ScrollBar id="scrollBar" fx:id="bandScrollBar" blockIncrement="1.0" max="50.0" onMouseClicked="#moveBandScrollBar" prefHeight="24.0" prefWidth="545.0" visibleAmount="1.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" />
+                <Button layoutX="435.0" layoutY="301.0" mnemonicParsing="false" onAction="#applyLPFilterButton" text="Применить" />
+                <TextField id="thresholdField" fx:id="nField" layoutX="93.0" layoutY="303.0" prefWidth="67.0" />
+                <Label layoutX="14.0" layoutY="306.0" text="N" />
+                <TextField id="thresholdField" fx:id="fcpField" layoutX="288.0" layoutY="303.0" prefWidth="67.0" />
+                <Label layoutX="209.0" layoutY="306.0" text="FCP" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Распознавание">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView fx:id="tableRecognition" prefHeight="296.0" prefWidth="531.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                  <columns>
+                    <TableColumn  prefWidth="273.0" text="Имя файла" fx:id="fileNameColumn" />
+                    <TableColumn  prefWidth="257.0" text="Растояние" fx:id="distanceColumn" />
+                  </columns>
+                </TableView>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+    <MenuBar prefWidth="497.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="Файл">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Открыть" />
+            <MenuItem mnemonicParsing="false" onAction="#loadModels" text="Загрузить эталоны" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Спектр">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#fourerButton" text="Фурье" />
+            <MenuItem mnemonicParsing="false" onAction="#chebyshevButton" text="Чебышева" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Распознавание">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+  </children>
+</AnchorPane>
